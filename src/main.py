@@ -39,7 +39,7 @@ class Application:
         self.axis_length = self.canvas_size[0] - 2 * self.offset
         self.canvas.pack(expand = True, fill = BOTH, padx = 10, pady = 0)
         # label stuff
-        self.label_canvas = Canvas(self.master, background="#ffffff", width=self.windowsize[0], height=200)
+        self.label_canvas = Canvas(self.master, background="#D3D3D3", width=self.windowsize[0], height=200)
         self.label_canvas.pack()
         self.available_colors = []
         self.label_dict = {}
@@ -49,12 +49,13 @@ class Application:
         # render grid
         self.drawAxis()
 
-    def drawLegend(self):
-        self.label_canvas.create_text(self.windowsize[0]/2, 30, fill="darkblue",font="Times 20 italic bold",
-                        text="Click the", tags='text')
-                        
-        for value, t, x in enumerate(self.label_dict):
-            print(x)
+    def drawLegend(self): 
+        for idx, key in enumerate(self.label_dict):
+            self.label_canvas.create_text(self.windowsize[0]/2, 30 + 30 * idx, fill="darkblue",font="Times 20 italic bold",
+            text = "" + key + ": " + self.label_dict.get(key), tags='text')
+            self.label_canvas.create_rectangle(self.windowsize[0]/2 + 70, 30 + 30 * idx, # upper left corner
+            self.windowsize[0]/2 + 80, 30 + 30 * idx + 10, # lower right corner
+            outline = self.label_dict.get(key), fill = self.label_dict.get(key))
         
     def loadNewData(self):
         # data points
