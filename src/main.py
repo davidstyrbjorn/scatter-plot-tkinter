@@ -1,6 +1,5 @@
 from fileinput import filename
 from tkinter import *
-import os
 from tkinter import filedialog
 
 def read_csv(f_name):
@@ -114,7 +113,8 @@ class Application:
         ty = (point[1] - min_y) / (max_y - min_y)
 
         draw_x = self.offset + self.axis_length * tx
-        draw_y = self.offset + self.axis_length * ty
+        # draw_y = self.offset + self.axis_length * ty
+        draw_y = (self.offset + self.axis_length) - self.axis_length * ty
         self.drawCircle(draw_x, draw_y, 4, self.label_dict[point[2]])
 
     def readFile(self):
